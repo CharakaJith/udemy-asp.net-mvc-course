@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +22,13 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+//app.MapControllerRoute(
+//    name: "moviesByReleaseDate",
+//    pattern: "movie/released/{year}/{month}",
+//    defaults: new { controller = "Movie", action = "ByReleaseDate" },
+//    constraints: new { year = @"\d{4}", month = @"\d{1, 2}" }
+//);
 
 app.MapControllerRoute(
     name: "default",
