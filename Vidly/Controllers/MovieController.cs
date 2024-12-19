@@ -6,6 +6,26 @@ namespace Vidly.Controllers
 {
     public class MovieController : Controller
     {
+        private List<Movie> movies = new List<Movie>
+        {
+            new Movie { Name = "Inception", Type = "Sci-Fi" },
+            new Movie { Name = "Kung-fu panda", Type = "Animation" },
+            new Movie { Name = "Predators", Type = "Action" },
+            new Movie { Name = "Dead Space", Type = "Family" },
+            new Movie { Name = "Aliens", Type = "Horror" }
+        };
+
+        [Route("movie/all")]
+        public IActionResult GetAllMovies()
+        {
+            var viewModel = new AllMoviesViewModel
+            {
+                Movies = movies
+            };
+
+            return View(viewModel);
+        }
+
         // GET: Movies
         public IActionResult Index(int? pageIndex, string? sortBy)
         {
