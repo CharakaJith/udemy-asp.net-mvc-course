@@ -13,4 +13,13 @@
 </head>
 <body>
     <h2>@Model.Name</h2>
+    <p>Membership type: @Model.MembershipType.Name</p>
+    @if (Model.BirthDate.HasValue)
+    {
+        <p>Birthday: @Model.BirthDate</p>
+    }
+    else
+    {
+        <p>Birthday: Not provided</p>
+    }
 </body>

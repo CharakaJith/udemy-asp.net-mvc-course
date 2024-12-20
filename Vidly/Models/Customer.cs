@@ -10,6 +10,8 @@ namespace Vidly.Models
         [StringLength(225)]
         public string Name { get; set; }
 
+        public DateOnly? BirthDate { get; set; }
+
         [Required]
         public bool IsSubscribedToNewsletter { get; set; }
 
