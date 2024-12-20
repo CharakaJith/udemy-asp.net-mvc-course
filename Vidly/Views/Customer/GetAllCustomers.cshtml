@@ -23,8 +23,9 @@
             <table class="table table-bordered table-striped text-center">
                 <thead class="thead-light">
                     <tr>
-                        <th style="width: 50%;">Name</th>
-                        <th style="width: 50%;">Discount Rate</th>
+                        <th style="width: 40%;">Name</th>
+                        <th style="width: 40%;">Subscription</th>
+                        <th style="width: 20%;">Discount Rate</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,7 @@
                                     @customer.Name
                                 </a>
                             </td>
+                            <td>@customer.MembershipType.Name</td>
                             <td>@customer.MembershipType.DiscountRate %</td>
                         </tr>
                     }
