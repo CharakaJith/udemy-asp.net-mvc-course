@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Vidly.Data;
 using Vidly.Models;
 using Vidly.ViewModels;
 
@@ -6,19 +8,26 @@ namespace Vidly.Controllers
 {
     public class CustomerController : Controller
     {
-        private List<Customer> Customers = new List<Customer>
+        private ApplicationContext _context;
+
+        public CustomerController(ApplicationContext context)
         {
-            new Customer { Id = 1, Name = "John Doe", Age = 21 },
-            new Customer { Id = 2, Name = "Jane Doe", Age = 17 },
-            new Customer { Id = 3, Name = "Bob Spade", Age = 32 }
-        };
+            _context = context;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
 
         [Route("customer/all")]
         public IActionResult GetAllCustomers()
         {
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+
             var viewModel = new AllCustomersViewModel
             {
-                Customers = Customers
+                Customers = customers
             };
 
             return View(viewModel);
@@ -27,7 +36,7 @@ namespace Vidly.Controllers
         [Route("customer/{id}")]
         public IActionResult GetCustomerById(int id)
         {
-            var customer = Customers[id];
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             return View(customer);
         }

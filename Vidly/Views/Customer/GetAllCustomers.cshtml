@@ -24,7 +24,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th style="width: 50%;">Name</th>
-                        <th style="width: 50%;">Age</th>
+                        <th style="width: 50%;">Discount Rate</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +36,7 @@
                                     @customer.Name
                                 </a>
                             </td>
-                            <td>@customer.Age</td>
+                            <td>@customer.MembershipType.DiscountRate %</td>
                         </tr>
                     }
                 </tbody>
