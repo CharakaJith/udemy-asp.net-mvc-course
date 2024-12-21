@@ -10,6 +10,12 @@
 
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-lumen.css" />
+    <style>
+        .custom-link:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-4">
@@ -33,7 +39,7 @@
                     {
                         <tr>
                             <td>
-                                <a class="nav-link text-dark" href="/customer/@customer.Id">
+                                <a class="nav-link text-dark custom-link" href="/customer/@customer.Id">
                                     @customer.Name
                                 </a>
                             </td>

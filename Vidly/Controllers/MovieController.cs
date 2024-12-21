@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Vidly.Data;
 using Vidly.Models;
 using Vidly.ViewModels;
 
@@ -6,24 +8,38 @@ namespace Vidly.Controllers
 {
     public class MovieController : Controller
     {
-        private List<Movie> movies = new List<Movie>
+        private ApplicationContext _context;
+
+        public MovieController(ApplicationContext context)
         {
-            new Movie { Name = "Inception", Type = "Sci-Fi" },
-            new Movie { Name = "Kung-fu panda", Type = "Animation" },
-            new Movie { Name = "Predators", Type = "Action" },
-            new Movie { Name = "Dead Space", Type = "Family" },
-            new Movie { Name = "Aliens", Type = "Horror" }
-        };
+            _context = context;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
 
         [Route("movie/all")]
         public IActionResult GetAllMovies()
         {
+            var movies = _context.Movies.Include(m => m.Genre).ToList();
+
             var viewModel = new AllMoviesViewModel
             {
                 Movies = movies
             };
 
             return View(viewModel);
+        }
+
+        [Route("movie/{id}")]
+        public IActionResult GetMovieById(int id)
+        {
+            var customer = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
+
+            return View(customer);
         }
 
         // GET: Movies
@@ -46,8 +62,7 @@ namespace Vidly.Controllers
         {
             var movie = new Movie
             {
-                Name = "Inception",
-                Type = "Sci-Fi"
+                Name = "Inception"
             };
             var customers = new List<Customer>
             {

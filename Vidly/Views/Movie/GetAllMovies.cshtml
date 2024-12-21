@@ -10,6 +10,12 @@
 
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-lumen.css" />
+    <style>
+        .custom-link:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-4">
@@ -24,15 +30,21 @@
                 <thead class="thead-light">
                     <tr>
                         <th style="width: 50%;">Name</th>
-                        <th style="width: 50%;">Type</th>
+                        <th style="width: 30%;">Genre</th>
+                        <th style="width: 20%;">Stock</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var movie in Model.Movies)
                     {
                         <tr>
-                            <td>@movie.Name</td>
-                            <td>@movie.Type</td>
+                            <td>
+                                <a class="nav-link text-dark custom-link" href="/movie/@movie.Id">
+                                    @movie.Name
+                                </a>                                
+                            </td>
+                            <td>@movie.Genre.Name</td>
+                            <td>@movie.NumOfStocks</td>
                         </tr>
                     }
                 </tbody>
