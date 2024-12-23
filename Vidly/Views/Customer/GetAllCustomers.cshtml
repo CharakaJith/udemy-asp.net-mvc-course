@@ -39,9 +39,7 @@
                     {
                         <tr>
                             <td>
-                                <a class="nav-link text-dark custom-link" href="/customer/@customer.Id">
-                                    @customer.Name
-                                </a>
+                                @Html.ActionLink(customer.Name, "UpdateCustomer", "customer", new { id = customer.Id })
                             </td>
                             <td>@customer.MembershipType.Name</td>
                             <td>@customer.MembershipType.DiscountRate %</td>
