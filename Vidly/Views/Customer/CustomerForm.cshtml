@@ -20,18 +20,22 @@ else
 
 @using (Html.BeginForm("SaveCustomerDetails", "customer", FormMethod.Post))
 {
+    @* @Html.ValidationSummary() *@
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.Name)
         @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Customer.MembershipTypeId)
+        @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.BirthDate)
         @Html.TextBoxFor(c => c.Customer.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })
-    </div>    
-    <div class="form-group">
-        @Html.LabelFor(c => c.Customer.MembershipTypeId)
-        @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
-    </div>
+        @Html.ValidationMessageFor(c => c.Customer.BirthDate, "", new { @class = "text-danger" })
+    </div>        
     <p></p>
     <div class="form-group">
         <label>
@@ -40,6 +44,12 @@ else
     </div>
     <hr />
 
-    @Html.HiddenFor(c => c.Customer.Id);
+    @Html.HiddenFor(c => c.Customer.Id)
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts {
+    <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
