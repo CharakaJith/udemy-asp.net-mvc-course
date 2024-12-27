@@ -20,6 +20,11 @@
 <body>
     <div class="container mt-4">
         <h2>Customers</h2>
+        <div>
+            @Html.ActionLink("NEW CUSTOMER", "RegisterNewCustomer", "Customer", null, new { @class = "btn btn-primary" })
+            <hr/>
+        </div>
+        
         @if (Model.Customers.Count == 0)
         {
             <p>There are no registered customers yet!</p>

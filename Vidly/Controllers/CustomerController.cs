@@ -59,10 +59,8 @@ namespace Vidly.Controllers
                 existingCustomer.MembershipType = customer.MembershipType;
                 existingCustomer.MembershipTypeId = customer.MembershipTypeId;                
             }
-
             
             _context.SaveChanges();
-
 
             return RedirectToAction("GetAllCustomers", "Customer");
         }

@@ -20,6 +20,11 @@
 <body>
     <div class="container mt-4">
         <h2>Movies</h2>
+        <div>
+            @Html.ActionLink("NEW MOVIE", "RegisterNewMovie", "Movie", null, new { @class = "btn btn-primary" })
+            <hr />
+        </div>
+
         @if (Model.Movies.Count == 0) 
         {
             <p>There are no movies yet!</p>
@@ -29,8 +34,8 @@
             <table class="table table-bordered table-striped text-center">
                 <thead class="thead-light">
                     <tr>
-                        <th style="width: 50%;">Name</th>
-                        <th style="width: 30%;">Genre</th>
+                        <th style="width: 40%;">Name</th>
+                        <th style="width: 40%;">Genre</th>
                         <th style="width: 20%;">Stock</th>
                     </tr>
                 </thead>
@@ -39,9 +44,7 @@
                     {
                         <tr>
                             <td>
-                                <a class="nav-link text-dark custom-link" href="/movie/@movie.Id">
-                                    @movie.Name
-                                </a>                                
+                                @Html.ActionLink(movie.Name, "UpdateMovie", "movie", new { id = movie.Id })
                             </td>
                             <td>@movie.Genre.Name</td>
                             <td>@movie.NumOfStocks</td>
